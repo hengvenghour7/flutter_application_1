@@ -48,9 +48,14 @@ class MainApp extends StatelessWidget {
         },
         '/user': (BuildContext context) {
           return Center(
-            child: Text("user page",
+            child: TextButton(
+              onPressed: () => {
+                print("user button is pressed")
+              },
+              child:Text("user page",
               textDirection: TextDirection.ltr,
               )
+            )
           );
         }
       },
