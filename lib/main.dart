@@ -3,31 +3,69 @@ import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/sprite.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 var x = 0.0;
 bool isMoveRight = false;
 void main() {
+  usePathUrlStrategy();
   runApp(
-     Center(
-      child: Column(
-        children: [
-          Text(
-        "Haha Game",
-        textDirection: TextDirection.ltr,
-        style: TextStyle(color: Colors.blue),
-        ),
-        Expanded(child: 
-          GameWidget(
-            game: MyGame(),
-          ),
-        )
-         
-        ],
-      )
-      
-    ),
+     MainApp()
   );
 }
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: <String, WidgetBuilder> {
+        '/':(BuildContext context) {
+          return Center(
+            child: Column(children: [
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(color: Color.fromARGB(255, 180, 21, 21)),
+                          left: BorderSide(color: Color(0xFFDFDFDF)),
+                          right: BorderSide(color: Color.fromARGB(255, 4, 111, 84)),
+                          bottom: BorderSide(color: Color.fromARGB(255, 4, 111, 84)),
+                        ),
+                    ),
+                    child: Text(
+                        "Main App",
+                        textDirection: TextDirection.ltr,
+                        style: TextStyle(color: Colors.blue, fontStyle: FontStyle.italic, fontSize: 24)
+                      )
+                  ) ,
+                    Expanded(child: GameWidget(game: MyGame()))
+                ],)
+            
+          );
+        },
+        '/user': (BuildContext context) {
+          return Center(
+            child: Text("user page",
+              textDirection: TextDirection.ltr,
+              )
+          );
+        }
+      },
+    );
+  }
+}
+
+// class NavigateButton extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+      
+//     )
+//   }
+// }
 
 class MyGame extends FlameGame {
   late final SpriteAnimationComponent player;
